@@ -157,7 +157,7 @@ async function newPosts(posts) {
   for (const post of posts) {
     // getMentions(post);
     num_of_posts += 1;
-    downloadPost(post);
+    // downloadPost(post);
     post.classList.add("avalan-post");
     this.setTimeout(() => {post.focus({ preventScroll: true })}, 100);
   }
