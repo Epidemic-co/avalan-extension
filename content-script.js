@@ -47,7 +47,6 @@ function downloadMedia(post) {
 function getWidget( ) {
   const widget = document.createElement('div');
   widget.classList = 'avalan-widget-wrapper';
-  console.log("setting inner html");
   widget.innerHTML = `
     <div class="avalan-widget">
       <div class="avalan-widget-inner">
