@@ -1,38 +1,30 @@
+function openInAvalan() {
+  const url = window.location.href;
+  const username = url.split('/')[3];
+  const newUrl = `https://app.avalan.io/analytics/${username}`;
+  window.open(newUrl, '_blank');
+}
+
 function getRedirectButton() {
   const button = document.createElement('button');
   button.innerText = 'Open in Avalan';
   button.classList = 'avalan-redirect-button';
-  button.onclick = () => {
-    const url = window.location.href;
-    const username = url.split('/')[3];
-    const newUrl = `https://app.avalan.io/analytics/${username}`;
-    window.open(newUrl, '_blank');
-  };
+  button.onclick = () => {openInAvalan()};
   return button;
 }
 
 function getData(id, text, defaultValue = "Loading...") {
-  const data = document.createElement('div');
-  const dataText = document.createElement('div');
-  const dataValue = document.createElement('div');
-  data.id = id;
-  dataValue.classList = 'data-value';
-  dataText.className = 'data-text';
-  dataText.innerText = text;
-  dataValue.innerHTML = defaultValue;
-  data.appendChild(dataValue);
-  data.appendChild(dataText);
-  return data;
+  return `<div id='${id}' class='data'>
+    <div class='data-value'>${defaultValue}</div>
+    <div class='data-text'>${text}</div>
+  </div>`;
 }
 
 function getLogo() {
-  const logo = document.createElement('div');
-  logo.innerHTML = `
-    <svg width="24" height="24" viewBox="0 0 372 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  return `<svg width="24" height="24" viewBox="0 0 372 400" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M162.594 0C250.573 0.000342934 282.971 126.653 232.836 198.895L93.2664 400C5.28632 399.999 -26.2715 272.243 23.8639 200L162.594 0Z" fill="black"/>
       <path d="M371.046 321.087C371.046 364.647 335.706 399.96 292.112 399.96C248.518 399.96 213.178 364.647 213.178 321.087C213.178 277.526 248.518 242.213 292.112 242.213C335.706 242.213 371.046 277.526 371.046 321.087Z" fill="black"/>
     </svg>`
-  return logo;
 }
 
 function downloadMedia(post) {
@@ -52,18 +44,29 @@ function downloadMedia(post) {
     event.stopPropagation();
 }
 
-function getWidget() {
+function getWidget( ) {
   const widget = document.createElement('div');
-  widget.classList = 'avalan-widget';
-  const widgetInner = document.createElement('div');
-  widget.appendChild(widgetInner);
-  widgetInner.classList = "avalan-widget-inner";
-  widgetInner.appendChild(getLogo());
-  widgetInner.appendChild(getData('avalan-likes', 'Avg. Likes'));
-  widgetInner.appendChild(getData('avalan-comments', 'Avg. Comments'));
-  widgetInner.appendChild(getData('avalan-engagement', 'Engagement'));
+  widget.classList = 'avalan-widget-wrapper';
+  console.log("setting inner html");
+  widget.innerHTML = `
+    <div class="avalan-widget">
+      <div class="avalan-widget-inner">
+        <div id="logo">${getLogo()}</div>
+        ${getData('avalan-likes', 'Avg. Likes')}
+        ${getData('avalan-comments', 'Avg. Comments')}
+        ${getData('avalan-engagement', 'Engagement')}
+      </div>
+      <div class="avalan-widget-info">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-info-circle-fill info-icon" viewBox="0 0 16 16">
+          <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2"/>
+        </svg>
+        Click <a class="open-in-avalan">Open in Avalan</a> to explore the mentioned brands, audience demographics, including age, gender, location, and more...
+      </div>
+    </div>
+  `;
+  widget.querySelector(".open-in-avalan").onclick = () => openInAvalan(); 
+  widget.querySelector(".avalan-widget-inner").appendChild(getRedirectButton());
   // widget.appendChild(getData('avalan-competitor', 'Competitors', '✅'));
-  widgetInner.appendChild(getRedirectButton());
   return widget;
 }
 

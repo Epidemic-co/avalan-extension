@@ -3,15 +3,20 @@
     color: #667085;
 }
 
-.avalan-widget {
+.avalan-widget-wrapper {
     position: fixed;
     bottom: 24px;
     z-index: 9999;
     width: 100%;
 }
 
-.avalan-widget-inner {
+.avalan-widget {
     margin: 0 14% 0 29%;
+    background-color: rgb(239, 242, 244);
+    border-radius: 10px;
+}
+
+.avalan-widget-inner {
     background-color: white;
     border-radius: 10px;
     border-color: #EAECF0;
@@ -22,6 +27,24 @@
     align-items: center;
 }
 
+.avalan-widget-info {
+    display: flex;
+    align-items: center;
+    background-color: rgb(239, 242, 244);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 4px 8px;
+    font-size: 12px;
+}
+
+.info-icon {
+    margin-right: 4px;
+}
+
+.open-in-avalan {
+    text-decoration: underline;
+    margin: 0px 4px;
+}
 .avalan-competitor-alert {
     background-color: rgb(238, 35, 39);
     color: white;
