@@ -1,6 +1,6 @@
 {
     "name": "Avalan",
-    "version": "0.7",
+    "version": "0.8",
     "manifest_version": 3,
     "icons": {
       "16": "avalan_icon.png",
