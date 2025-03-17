@@ -130,6 +130,11 @@ function parsee(str) {
 }
 
 async function getEngagement(mutation) {
+  if (followers === 1) {
+    let followersDom = document.querySelector("a[href*='/followers/'] span");
+    if (followersDom) followers = parsee(followersDom.innerText);
+  }
+
   if (mutation.target.classList.contains("avalan-checked")) return;
 
   let likesComments = mutation.addedNodes[0].querySelectorAll("li .html-span");
@@ -176,16 +181,11 @@ const observe = (mutationList, observer) => {
 };
 
 function init() {
-  console.log("Avalan is running...");
   resetData();
-  let followersDom = document.querySelector("a[href*='/followers/'] span");
-
-  if (followersDom) followers = parsee(followersDom.innerText);
   
   if (document.querySelector(".avalan-widget")) return;
   document.querySelector("body").appendChild(getWidget());
 
-  console.log("observer started");  
   const config = { attributes: true, childList: true, subtree: true };
   const observer = new MutationObserver(observe);
   observer.observe(document.body, config);
