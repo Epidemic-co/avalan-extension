@@ -1,0 +1,21 @@
+{
+    "name": "Avalan",
+    "version": "0.7",
+    "manifest_version": 3,
+    "icons": {
+      "16": "avalan_icon.png",
+      "48": "avalan_icon.png",
+      "128": "avalan_icon.png"
+    },
+    "permissions": ["storage"],
+    "content_scripts": [
+        {
+          "matches": ["https://www.instagram.com/*"],
+          "js": ["content-script.js"],
+          "css": ["volan.css"]
+        }
+    ],
+    "host_permissions": [
+      "*://*.instagram.com/*"
+    ]
+}
