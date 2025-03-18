@@ -1,6 +1,6 @@
 {
     "name": "Avalan",
-    "version": "0.8",
+    "version": "1.0",
     "manifest_version": 3,
     "icons": {
       "16": "avalan_icon.png",
@@ -14,8 +14,5 @@
           "js": ["content-script.js"],
           "css": ["volan.css"]
         }
-    ],
-    "host_permissions": [
-      "*://*.instagram.com/*"
     ]
 }

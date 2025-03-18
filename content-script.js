@@ -27,23 +27,6 @@ function getLogo() {
     </svg>`
 }
 
-function downloadMedia(post) {
-  const code = post.href.split('/')[5];
-  fetch(`https://www.instagram.com/p/${code}/?__a=1&__d=dis`)
-    .then(response => response.json())
-    .then(data => {
-      const a = document.createElement('a')
-      const url = data.items[0].video_versions ? data.items[0].video_versions[0].url : data.items[0].image_versions2.candidates[0].url;
-      fetch(url).then(response => response.blob()).then(blob => {
-        a.href = URL.createObjectURL(blob);
-        a.download = data.items[0].video_versions ? `${code}.mp4` : `${code}.jpg`;
-        a.click();
-      });
-    });
-    event.preventDefault();
-    event.stopPropagation();
-}
-
 function getWidget( ) {
   const widget = document.createElement('div');
   widget.classList = 'avalan-widget-wrapper';
@@ -76,27 +59,19 @@ function getCompetitorAlert() {
   return alert; 
 }
 
-function getDownloadPostButton(post) {
-  const button = document.createElement('a');
-  button.onclick = () => downloadMedia(post);
-  button.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>';
-  button.classList = 'avalan-download-button';
-
-  if (post.querySelector("._aagw") !== null) {
-    post.querySelector("._aagw").appendChild(button);
-  }
-}
-
+let username = "";
 let followers = 1;
 let num_of_posts = 0;
 let likes = [];
 let comments = [];
 let engagement = [];
 let competitors = [];
+let cache = {};
 
 const regex = /@(\w+)/g;
 
 function resetData() {
+  username = window.location.href.split('/')[3];
   likes = [];
   comments = [];
   engagement = [];
@@ -148,11 +123,26 @@ async function getEngagement(mutation) {
   }
   comments.push(parsee(likesComments[1].innerText));
 
-  document.querySelector("#avalan-likes .data-value").innerText = kFormatter(likes.reduce((a, b) => a + b, 0) / likes.length);
-  document.querySelector("#avalan-comments .data-value").innerText = kFormatter(comments.reduce((a, b) => a + b, 0) / comments.length);
-  document.querySelector("#avalan-engagement .data-value").innerText = ((engagement.reduce((a, b) => a + b, 0) / engagement.length) * 100).toFixed(2) + "%";
+  let avgLikes = kFormatter(likes.reduce((a, b) => a + b, 0) / likes.length);
+  let avgComments = kFormatter(comments.reduce((a, b) => a + b, 0) / comments.length);
+  let avgEngagement = ((engagement.reduce((a, b) => a + b, 0) / engagement.length) * 100).toFixed(2) + "%";
+
+  document.querySelector("#avalan-likes .data-value").innerText = avgLikes;
+  document.querySelector("#avalan-comments .data-value").innerText = avgComments;
+  document.querySelector("#avalan-engagement .data-value").innerText = avgEngagement;
+
+  cache[username] = [avgLikes, avgComments, avgEngagement];
 
   mutation.target.blur();
+}
+
+function setFromCache() {
+  let data = cache[username];
+  console.log("cache", data);
+  if (data === undefined) return;
+  document.querySelector("#avalan-likes .data-value").innerText = data[0];
+  document.querySelector("#avalan-comments .data-value").innerText = data[1];
+  document.querySelector("#avalan-engagement .data-value").innerText = data[2];
 }
 
 async function newPosts(posts) {
@@ -209,7 +199,8 @@ setInterval(() => {
 
   if (window.location.href !== currentUrl) {
     currentUrl = window.location.href;
-    init();
+    resetData();
+    setFromCache();
   }
 }, 500); // Check every second
 
