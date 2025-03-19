@@ -5,6 +5,11 @@ function openInAvalan() {
   window.open(newUrl, '_blank');
 }
 
+function openOptions() {
+  // let optionsUrl = chrome.runtime.getURL('options.html');
+  chrome.runtime.openOptionsPage();
+}
+
 function getRedirectButton() {
   const button = document.createElement('button');
   button.innerText = 'Open in Avalan';
@@ -37,6 +42,10 @@ function getWidget( ) {
         ${getData('avalan-likes', 'Avg. Likes')}
         ${getData('avalan-comments', 'Avg. Comments')}
         ${getData('avalan-engagement', 'Engagement')}
+        <div id="avalan-competitor" class="data">
+          <div class="data-value">🟢</div>
+          <div class="data-text">Competitors</div>
+        </div>
       </div>
       <div class="avalan-widget-info">
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-info-circle-fill info-icon" viewBox="0 0 16 16">
@@ -46,6 +55,7 @@ function getWidget( ) {
       </div>
     </div>
   `;
+  widget.querySelector("#avalan-competitor").onclick = () => openOptions();
   widget.querySelector(".open-in-avalan").onclick = () => openInAvalan(); 
   widget.querySelector(".avalan-widget-inner").appendChild(getRedirectButton());
   // widget.appendChild(getData('avalan-competitor', 'Competitors', '✅'));

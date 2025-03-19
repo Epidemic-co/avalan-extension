@@ -84,6 +84,27 @@
             /* Tailwind blue-600 with opacity */
             outline: none;
         }
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            background-color: rgb(239, 242, 244);
+            padding: 4px 8px;
+            border-radius: 10px;
+            margin: 5px;
+            font-size: 14px;
+        }
+        .tag button {
+            background: none;
+            border: none;
+            margin-left: 5px;
+            padding: 0px;
+            cursor: pointer;
+            color: black;
+        }
+
+        .tag button::before {
+            content: '\00d7';
+        }
     </style>
 </head>
 
@@ -91,10 +112,9 @@
     <div class="card">
         <h1>Settings</h1>
         <form id="settingsForm">
-            <input type="text" id="competitors" placeholder="Enter competitors" style="margin-bottom: 4px;">
-            <label>
-                Input competitor Instagram usernames, seperated with commas. Example: instagram,hm,zara <br>
-            </label>
+            <input type="text" id="competitors" placeholder="Type and press Enter" style="margin-bottom: 4px;">
+            <label>Input competitor Instagram usernames and press enter</label>
+            <div id="tagContainer"></div>
             <br>
             <br>
             <button type="button" id="saveSettings">Save Settings</button>
