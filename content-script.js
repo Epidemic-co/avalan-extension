@@ -1,3 +1,12 @@
+let username = "";
+let followers = 1;
+let num_of_posts = 0;
+let likes = [];
+let comments = [];
+let engagement = [];
+let competitors = [];
+let cache = {};
+
 function openInAvalan() {
   const url = window.location.href;
   const username = url.split('/')[3];
@@ -6,7 +15,6 @@ function openInAvalan() {
 }
 
 function openOptions() {
-  // let optionsUrl = chrome.runtime.getURL('options.html');
   chrome.runtime.openOptionsPage();
 }
 
@@ -32,6 +40,11 @@ function getLogo() {
     </svg>`
 }
 
+function getCompetitorIcon() {
+  if (competitors.length === 0) return "<a class='settings-button'>Add Competitors +</a>";
+  return "✅";
+}
+
 function getWidget( ) {
   const widget = document.createElement('div');
   widget.classList = 'avalan-widget-wrapper';
@@ -43,8 +56,13 @@ function getWidget( ) {
         ${getData('avalan-comments', 'Avg. Comments')}
         ${getData('avalan-engagement', 'Engagement')}
         <div id="avalan-competitor" class="data">
-          <div class="data-value">🟢</div>
-          <div class="data-text">Competitors</div>
+          <div class="data-value">${getCompetitorIcon()}</div>
+          <div class="data-text" style="display: flex; align-items: center;">
+            Competitors
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-short settings-button" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>
+            </svg>
+          </div>
         </div>
       </div>
       <div class="avalan-widget-info">
@@ -55,28 +73,18 @@ function getWidget( ) {
       </div>
     </div>
   `;
-  widget.querySelector("#avalan-competitor").onclick = () => openOptions();
+  widget.querySelector(".settings-button").onclick = () => openOptions();
   widget.querySelector(".open-in-avalan").onclick = () => openInAvalan(); 
   widget.querySelector(".avalan-widget-inner").appendChild(getRedirectButton());
-  // widget.appendChild(getData('avalan-competitor', 'Competitors', '✅'));
   return widget;
 }
 
-function getCompetitorAlert() {
+function getCompetitorAlert(username) {
   const alert = document.createElement('div');
-  alert.innerHTML = "🚨 Competitor Alert 🚨";
+  alert.innerHTML = `🚨 ${username} 🚨`;
   alert.classList = 'avalan-competitor-alert';
   return alert; 
 }
-
-let username = "";
-let followers = 1;
-let num_of_posts = 0;
-let likes = [];
-let comments = [];
-let engagement = [];
-let competitors = [];
-let cache = {};
 
 const regex = /@(\w+)/g;
 
@@ -96,7 +104,7 @@ async function getMentions(post) {
   while ((matches = regex.exec(caption)) !== null) {
     if (competitors.includes(matches[1])) {
       document.querySelector("#avalan-competitor .data-value").innerText = "🚨";
-      post.querySelector("._aagw").appendChild(getCompetitorAlert());
+      post.querySelector("._aagw").appendChild(getCompetitorAlert(matches[1]));
       break;
     }
   }
@@ -141,23 +149,23 @@ async function getEngagement(mutation) {
   document.querySelector("#avalan-comments .data-value").innerText = avgComments;
   document.querySelector("#avalan-engagement .data-value").innerText = avgEngagement;
 
-  cache[username] = [avgLikes, avgComments, avgEngagement];
+  cache[username] = [avgLikes, avgComments, avgEngagement, document.querySelector("#avalan-competitor .data-value").innerText];
 
   mutation.target.blur();
 }
 
 function setFromCache() {
   let data = cache[username];
-  console.log("cache", data);
   if (data === undefined) return;
   document.querySelector("#avalan-likes .data-value").innerText = data[0];
   document.querySelector("#avalan-comments .data-value").innerText = data[1];
   document.querySelector("#avalan-engagement .data-value").innerText = data[2];
+  document.querySelector("#avalan-competitor .data-value").innerText = data[3];
 }
 
 async function newPosts(posts) {
   for (const post of posts) {
-    // getMentions(post);
+    getMentions(post);
     num_of_posts += 1;
     // downloadPost(post);
     post.classList.add("avalan-post");
@@ -195,11 +203,9 @@ function init() {
 
 window.addEventListener('load', function load(e){
   chrome.storage.sync.get(['competitors'], function(items) {
-      if (items.competitors) {
-        competitors = items.competitors;
-      }
+      if (items.competitors) competitors = items.competitors;
+      init();
   });
-  init();
 }, false);
 
 let currentUrl = window.location.href;
@@ -210,6 +216,7 @@ setInterval(() => {
   if (window.location.href !== currentUrl) {
     currentUrl = window.location.href;
     resetData();
+    document.querySelector("#avalan-competitor .data-value").innerText = "🟢";
     setFromCache();
   }
 }, 500); // Check every second

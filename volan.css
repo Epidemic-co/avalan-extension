@@ -108,3 +108,7 @@
     cursor: pointer;
     z-index: 9999;
 }
+
+.settings-button {
+    cursor: pointer;
+}
