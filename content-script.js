@@ -24,6 +24,7 @@ async function newPosts(posts) {
     getMentions(post);
     num_of_posts += 1;
     post.classList.add("avalan-post");
+    if (num_of_posts > 12) break;
     this.setTimeout(() => {post.focus({ preventScroll: true })}, 100);
   }
 }

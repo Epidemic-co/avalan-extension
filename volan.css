@@ -23,11 +23,12 @@
 
 .avalan-widget-wrapper {
     position: fixed;
-    bottom: 24px;
+    bottom: 12px;
     z-index: 9999;
     width: 100%;
     display: flex;
     justify-content: center;
+    pointer-events: none;
 }
 
 .avalan-widget {
@@ -35,6 +36,7 @@
     border-radius: 10px;
     min-width: 800px;
     max-width: 1055px;
+    pointer-events: auto;
 }
 
 .avalan-widget-inner {
