@@ -51,6 +51,7 @@
 }
 
 .avalan-widget-info {
+    color: black;
     display: flex;
     align-items: center;
     background-color: rgb(239, 242, 244);
@@ -65,6 +66,7 @@
 }
 
 .open-in-avalan {
+    color: #1C1C1C;
     text-decoration: underline;
     margin: 0px 4px;
 }
