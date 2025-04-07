@@ -2,7 +2,6 @@
     "name": "Avalan",
     "version": "1.1",
     "manifest_version": 3,
-    "options_page": "options.html",
     "icons": {
       "16": "avalan_icon.png",
       "48": "avalan_icon.png",

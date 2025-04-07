@@ -21,8 +21,7 @@ function resetData() {
 
 async function newPosts(posts) {
   posts.forEach(post => {
-    console.log(post);
-    getMentions(post);
+    // getMentions(post);
     num_of_posts += 1;
     post.classList.add("avalan-post");
     if (num_of_posts < 12) {
@@ -72,7 +71,7 @@ setInterval(() => {
   if (window.location.href !== currentUrl) {
     currentUrl = window.location.href;
     resetData();
-    document.querySelector("#avalan-competitor .data-value").innerText = "✅";
+    // document.querySelector("#avalan-competitor .data-value").innerText = "✅";
     setFromCache();
   }
 }, 500);
