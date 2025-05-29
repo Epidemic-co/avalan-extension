@@ -36,6 +36,9 @@ const observe = (mutationList, observer) => {
     if (mutation.type === 'childList' && typeof mutation.addedNodes[0].querySelector !== "undefined") {
       if (mutation.addedNodes[0].querySelector("li .html-span") !== null) {
         // Post was focused
+        const parentElement = mutation.addedNodes[0].parentElement;
+        if (!parentElement.classList.contains("avalan-post")) continue;
+        
         if (num_of_posts < 13) getEngagement(mutation, followers);
       }
       else if (mutation.addedNodes[0].querySelector("._aagu") !== null) {

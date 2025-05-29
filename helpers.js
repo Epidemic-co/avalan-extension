@@ -103,7 +103,9 @@ function parsee(value) {
 
 async function getEngagement(mutation, followers) {
     if (followers === 1 || isNaN(followers)) {
+        console.log(document.querySelector("a[href*='/followers/'] span"));
         let followersDom = document.querySelector("a[href*='/followers/'] span");
+        if (followersDom === null) return;
         followers = parsee(followersDom.innerText);
     }
 
@@ -118,15 +120,17 @@ async function getEngagement(mutation, followers) {
     }
     comments.push(parsee(likesComments[1].innerText));
 
-    let avgLikes = kFormatter(likes.reduce((a, b) => a + b, 0) / likes.length);
-    let avgComments = kFormatter(comments.reduce((a, b) => a + b, 0) / comments.length);
-    let avgEngagement = ((engagement.reduce((a, b) => a + b, 0) / engagement.length) * 100).toFixed(2) + "%";
+    let avgLikes = kFormatter(likes.sort((a,b) => a-b)[Math.floor(likes.length/2)]);
+    let avgComments = kFormatter(comments.sort((a,b) => a-b)[Math.floor(comments.length/2)]);
+    let avgEngagement = (engagement.sort((a,b) => a-b)[Math.floor(engagement.length/2)] * 100).toFixed(2) + "%";
 
     document.querySelector("#avalan-likes .data-value").innerText = avgLikes;
     document.querySelector("#avalan-comments .data-value").innerText = avgComments;
     document.querySelector("#avalan-engagement .data-value").innerText = avgEngagement;
 
-    cache[username] = [avgLikes, avgComments, avgEngagement, document.querySelector("#avalan-competitor .data-value").innerText];
+    // const competitor = document.querySelector("#avalan-competitor .data-value").innerText
+
+    cache[username] = [avgLikes, avgComments, avgEngagement];
 
     mutation.target.blur();
 }
