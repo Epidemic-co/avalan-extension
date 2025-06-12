@@ -71,14 +71,20 @@
     margin: 0px 4px;
 }
 .avalan-competitor-alert {
-    background-color: rgb(238, 35, 39);
-    color: white;
-    text-align: center;
-    padding: 10px;
-    border-color: #FF0000;
-    border-style: solid;
-    z-index: 9999;
+    position: absolute;
+    width: 100%;
     bottom: 0;
+    z-index: 3;
+}
+
+.competitor-alert-inner {
+    border: 1px solid #EAECF0;
+    margin: 6px 8px;
+    padding: 6px;
+    text-align: center;
+    background-color: white;
+    color: black;
+    border-radius: 10px;
 }
 
 .avalan-download-button {

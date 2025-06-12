@@ -38,15 +38,19 @@ function getCompetitorIcon() {
     return "✅";
 }
 
-{/* <div id="avalan-competitor" class="data">
+function getCompetitorData() {
+    return `<div id="avalan-competitor" class="data">
 <div class="data-value">${getCompetitorIcon()}</div>
 <div class="data-text" style="display: flex; align-items: center;">
-  Competitors
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-short settings-button" viewBox="0 0 16 16">
-    <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>
-  </svg>
+    <span class="settings-button" style="display: flex; align-items: center;">
+        Competitors
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>
+        </svg>
+    </span>
 </div>
-</div> */}
+</div>`;
+}
 
 function getWidget() {
     const widget = document.createElement('div');
@@ -58,6 +62,7 @@ function getWidget() {
           ${getData('avalan-likes', 'Avg. Likes')}
           ${getData('avalan-comments', 'Avg. Comments')}
           ${getData('avalan-engagement', 'Engagement')}
+          ${getCompetitorData()}
         </div>
         <div class="avalan-widget-info">
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-info-circle-fill info-icon" viewBox="0 0 16 16">
@@ -67,17 +72,14 @@ function getWidget() {
         </div>
       </div>
     `;
-    // widget.querySelector(".settings-button").onclick = () => openOptions();
+    widget.querySelector(".settings-button").onclick = () => openOptions();
     widget.querySelector(".open-in-avalan").onclick = () => openInAvalan();
     widget.querySelector(".avalan-widget-inner").appendChild(getRedirectButton());
     return widget;
 }
 
 function getCompetitorAlert(username) {
-    const alert = document.createElement('div');
-    alert.innerHTML = `🚨 ${username} 🚨`;
-    alert.classList = 'avalan-competitor-alert';
-    return alert;
+    return `<div class='avalan-competitor-alert'><div class="competitor-alert-inner">🚨 @${username} 🚨</div></div>`;
 }
 
 async function getMentions(post) {
@@ -87,7 +89,7 @@ async function getMentions(post) {
     while ((matches = regex.exec(caption)) !== null) {
         if (competitors.includes(matches[1])) {
             document.querySelector("#avalan-competitor .data-value").innerText = "🚨";
-            post.querySelector("._aagw").appendChild(getCompetitorAlert(matches[1]));
+            post.querySelector("._aagw").innerHTML = getCompetitorAlert(matches[1]);
             break;
         }
     }
@@ -128,9 +130,9 @@ async function getEngagement(mutation, followers) {
     document.querySelector("#avalan-comments .data-value").innerText = avgComments;
     document.querySelector("#avalan-engagement .data-value").innerText = avgEngagement;
 
-    // const competitor = document.querySelector("#avalan-competitor .data-value").innerText
+    const competitor = document.querySelector("#avalan-competitor .data-value").innerText
 
-    cache[username] = [avgLikes, avgComments, avgEngagement];
+    cache[username] = [avgLikes, avgComments, avgEngagement, competitor];
 
     mutation.target.blur();
 }
@@ -151,5 +153,5 @@ function setFromCache() {
     document.querySelector("#avalan-likes .data-value").innerText = data[0];
     document.querySelector("#avalan-comments .data-value").innerText = data[1];
     document.querySelector("#avalan-engagement .data-value").innerText = data[2];
-    // document.querySelector("#avalan-competitor .data-value").innerText = data[3];
+    document.querySelector("#avalan-competitor .data-value").innerText = data[3];
 }
