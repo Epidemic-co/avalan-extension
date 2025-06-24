@@ -3,11 +3,16 @@ document.getElementById('saveSettings').addEventListener('click', saveSettings);
 
 // Save settings to chrome.storage
 function saveSettings() {
-    const competitors = document.querySelectorAll('.tag');
-    console.log(competitors);
+    let competitors = Array.from(document.querySelectorAll('.tag'));
+    competitors = competitors.map(competitor => competitor.textContent);
+
+    let competitorInput = document.getElementById('competitors');
+    if (competitorInput.value.trim() !== '') {
+        competitors.push(competitorInput.value.trim());
+    }
 
     chrome.storage.sync.set({
-        competitors: Array.from(competitors).map(competitor => competitor.textContent),
+        competitors: competitors,
     }, function() {
         console.log('Settings saved');
     });
