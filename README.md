@@ -17,3 +17,7 @@ Perfect for influencer vetting, campaign planning, and keeping your brand ahead.
 - Anyone working with Instagram partnerships
 
 Search smarter. Collaborate better. Grow faster.
+
+
+## Avalan
+Avalan extension is an extension of the [avalan.io](https://avalan.io) platform, that allows you to find, analyze and contacting millions of influencers. Track their content in one place and generate reports for your campaigns.
