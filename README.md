@@ -1,23 +1,33 @@
-# Avalan extension
-Upgrade your influencer strategy with powerful Instagram insights
+# Avalan Extension — Instant Instagram Insights, powered by Avalan.io
 
-This Chrome extension is built for influencer marketers, brands, and agencies who want fast, reliable data before making collaboration decisions.
+Stop guessing. The free, open‑source **Avalan Chrome extension** overlays hard‑to‑get engagement analytics, competitor flags, and collaboration history on any public Instagram profile while you browse. One click deeper and the full Avalan platform lets you track campaigns, approve content, and measure ROI across 80 M+ creators.
 
-🔍 Key Features:
-- Instantly view the average number of likes and comments on any public Instagram profile (based on their last 12 posts).
-- See the engagement rate – no more manual math!
-- See if they collaborated with you competitors
+---
 
-Perfect for influencer vetting, campaign planning, and keeping your brand ahead.
+## 🔍 Key features (in‑browser)
 
-👉 Ideal for:
-- Influencer marketers
-- Brand managers
-- Digital agencies
-- Anyone working with Instagram partnerships
+| What you see | Why it matters |
+|--------------|---------------|
+| **Avg. likes & comments** | Snapshot engagement quality without leaving Instagram. |
+| **Auto‑calculated engagement rate** | Consistent with industry benchmarks (good posts often land between 1 – 5 %). |
+| **“Worked‑with‑competitor” badge** | Instantly spot creators already promoting rival brands. |
+| **One‑click “Send to Avalan”** | Opens the full creator card inside Avalan for audience‑demographic, fake‑follower, and performance checks. |
 
-Search smarter. Collaborate better. Grow faster.
+---
 
+## 🌟 What the full Avalan platform adds
 
-## Avalan
-Avalan extension is an extension of the [avalan.io](https://avalan.io) platform, that allows you to find, analyze and contacting millions of influencers. Track their content in one place and generate reports for your campaigns.
+- **Creator discovery across 80 M+ profiles** with filters for niche, region, audience authenticity & more.  
+- **Instagram post / story / reel and Tiktok video tracking** so you never miss deliverables again.  
+- **Centralised content approvals** and automated brief sharing, saving teams dozens of hours each month.  
+- **Competitor analysis reports** showing which creators rival brands hire and what they pay.  
+- **Upgrade path built‑in** — start free, then unlock discovery and live dashboards when you activate an Avalan plan.
+
+---
+
+## 🚀 Getting started
+
+1. **Install the extension** [avalan.io](https://chromewebstore.google.com/detail/avalan/jdblmahhjgfpdpnnogpobdkcfopkphjj?hl=en).
+2. **Create a free Avalan workspace** at **[avalan.io](https://avalan.io/)** to sync lists and campaign data.  
+3. **Browse any public Instagram profile** — engagement stats appear instantly.  
+4. **Click “Open in Avalan”** to enrich with audience demographics, track content in real time, and tie creators to briefs, budgets, and results.
