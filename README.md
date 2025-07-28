@@ -2,6 +2,8 @@
 
 Stop guessing. The free, open‑source **Avalan Chrome extension** overlays hard‑to‑get engagement analytics, competitor flags, and collaboration history on any public Instagram profile while you browse. One click deeper and the full Avalan platform lets you track campaigns, approve content, and measure ROI across 80 M+ creators.
 
+Add the extension to your Chrome browser now from the [Chrome web store](https://chromewebstore.google.com/detail/avalan/jdblmahhjgfpdpnnogpobdkcfopkphjj?hl=en).
+
 ---
 
 ## 🔍 Key features (in‑browser)
