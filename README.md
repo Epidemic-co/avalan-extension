@@ -1,4 +1,4 @@
-# Avalan Extension — Instant Instagram Insights, powered by Avalan.io
+# Avalan Extension — Instant Instagram Insights, powered by [Avalan.io](https://avalan.io/)
 
 Stop guessing. The free, open‑source **Avalan Chrome extension** overlays hard‑to‑get engagement analytics, competitor flags, and collaboration history on any public Instagram profile while you browse. One click deeper and the full Avalan platform lets you track campaigns, approve content, and measure ROI across 80 M+ creators.
 
@@ -27,7 +27,7 @@ Stop guessing. The free, open‑source **Avalan Chrome extension** overlays hard
 
 ## 🚀 Getting started
 
-1. **Install the extension** [avalan.io](https://chromewebstore.google.com/detail/avalan/jdblmahhjgfpdpnnogpobdkcfopkphjj?hl=en).
+1. **Install the extension** [Chrome web store](https://chromewebstore.google.com/detail/avalan/jdblmahhjgfpdpnnogpobdkcfopkphjj?hl=en).
 2. **Create a free Avalan workspace** at **[avalan.io](https://avalan.io/)** to sync lists and campaign data.  
 3. **Browse any public Instagram profile** — engagement stats appear instantly.  
 4. **Click “Open in Avalan”** to enrich with audience demographics, track content in real time, and tie creators to briefs, budgets, and results.
